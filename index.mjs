@@ -2,12 +2,15 @@
 import express from 'express';
 import fetch from 'node-fetch';
 import cors from 'cors';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 app.use(cors());
 
-const PORT = 3001;
-const GOOGLE_API_KEY = 'AIzaSyBbcEN7dQFRVFJH_LEyRsryGJz89yQjktY'; // Replace with your actual API key
+const PORT = process.env.PORT || 3001;
+const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 
 app.get('/api/distance', async (req, res) => {
   const { origins, destinations } = req.query;
@@ -29,5 +32,5 @@ app.get('/api/distance', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
